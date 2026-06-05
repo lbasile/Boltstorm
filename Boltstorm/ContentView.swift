@@ -6,56 +6,63 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var service = ScryfallService()
+    @State private var query = ""
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        NavigationStack {
+            List(service.results) { card in
+                CardRow(card: card)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+            .overlay {
+                if service.isLoading {
+                    ProgressView()
+                } else if let error = service.errorMessage {
+                    ContentUnavailableView(error, systemImage: "magnifyingglass")
+                } else if service.results.isEmpty {
+                    ContentUnavailableView(
+                        "Search for Cards",
+                        systemImage: "rectangle.stack.badge.magnifyingglass",
+                        description: Text("Enter a card name to find matching cards.")
+                    )
                 }
             }
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            .navigationTitle("Boltstorm")
+            .searchable(text: $query, prompt: "Card name...")
+            .onSubmit(of: .search) {
+                Task { await service.search(query: query) }
             }
         }
     }
 }
 
+struct CardRow: View {
+    let card: Card
+
+    var body: some View {
+        HStack(spacing: 12) {
+            AsyncImage(url: card.thumbnailURL) { phase in
+                if case .success(let image) = phase {
+                    image.resizable().aspectRatio(contentMode: .fit)
+                } else {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.secondary.opacity(0.2))
+                }
+            }
+            .frame(width: 44, height: 62)
+            .clipShape(RoundedRectangle(cornerRadius: 4))
+
+            Text(card.name)
+                .font(.body)
+
+            Spacer()
+        }
+        .padding(.vertical, 2)
+    }
+}
+
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
