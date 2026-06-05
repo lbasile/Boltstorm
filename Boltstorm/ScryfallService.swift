@@ -12,6 +12,12 @@ final class ScryfallService {
     var isLoading = false
     var errorMessage: String?
 
+    private let session: URLSession
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
+
     func search(query: String) async {
         let trimmed = query.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
@@ -26,7 +32,7 @@ final class ScryfallService {
         ]
 
         do {
-            let (data, _) = try await URLSession.shared.data(from: components.url!)
+            let (data, _) = try await session.data(from: components.url!)
             let response = try JSONDecoder().decode(ScryfallSearchResponse.self, from: data)
             results = response.data
         } catch {
