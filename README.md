@@ -1,2 +1,2 @@
-# Boltstorm + Github Actions Playground
-A personal sandbox for playing with Github Actions, SwiftUI, and the Scryfall API in 2026
+# Boltstorm
+A personal sandbox for playing with SwiftUI and the Scryfall API in 2026
