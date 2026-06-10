@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct BoltstormApp: App {
+    init() {
+        ManaSymbology.registerFont()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

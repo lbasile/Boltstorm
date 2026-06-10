@@ -13,7 +13,12 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List(service.results) { card in
-                CardRow(card: card)
+                NavigationLink(value: card) {
+                    CardRow(card: card)
+                }
+            }
+            .navigationDestination(for: Card.self) { card in
+                CardDetailView(card: card)
             }
             .overlay {
                 if service.isLoading {
