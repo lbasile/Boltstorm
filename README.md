@@ -1,7 +1,7 @@
 # Boltstorm - Ongoing Portfolio Project
 Boltstorm is a simple search app for Magic: The Gathering cards. You can search by partial name, get a list of results, and tap in to see card details.
 
-This is a personal sandbox for playing with SwiftUI and the Scryfall API. Below are some highlights/notes on what I'm doing and learning from this project.
+This is an intentional exploration of spec-driven design with AI assistance. Rather than building a finished product (yet!), I'm focusing on how to work effectively with AI tooling and design thinking at the iOS level.
 
 ## One Spec-Driven Implementation (so far)
 [Card Detail Screen](Specs/CardDetailScreenUltraplanSpec.md)
@@ -16,6 +16,7 @@ One design problem AI likely couldn't see: a font can be colored, and the basic 
 ## SwiftUI symbolEffect Animation
 Animation utilizes .drawOn for the search image and withAnimation for the entire view, with a semi-custom delayed effect.
 
+See: [SearchEmptyView](Boltstorm/SearchEmptyView.swift)
 
 https://github.com/user-attachments/assets/02b730e4-5d7d-4978-bd11-2bcf1c0fdf53
 
