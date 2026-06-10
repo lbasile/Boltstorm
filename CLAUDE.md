@@ -6,13 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Build
-xcodebuild -project Boltstorm.xcodeproj -scheme Boltstorm -destination 'platform=iOS Simulator,name=iPhone 16' build
+xcodebuild -project Boltstorm.xcodeproj -scheme Boltstorm -destination 'platform=iOS Simulator,name=iPhone 17' build
 
 # Run unit tests
-xcodebuild -project Boltstorm.xcodeproj -scheme Boltstorm -destination 'platform=iOS Simulator,name=iPhone 16' test
+xcodebuild -project Boltstorm.xcodeproj -scheme Boltstorm -destination 'platform=iOS Simulator,name=iPhone 17' test
 
 # Run a single test
-xcodebuild -project Boltstorm.xcodeproj -scheme Boltstorm -destination 'platform=iOS Simulator,name=iPhone 16' test -only-testing:BoltstormTests/BoltstormTests/example
+xcodebuild -project Boltstorm.xcodeproj -scheme Boltstorm -destination 'platform=iOS Simulator,name=iPhone 17' test -only-testing:BoltstormTests/BoltstormTests/example
 ```
 
 ## Project Overview
