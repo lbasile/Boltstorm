@@ -3,6 +3,9 @@ Boltstorm is a simple search app for Magic: The Gathering cards. You can search 
 
 This is an intentional exploration of spec-driven design with AI assistance. Rather than building a finished product (yet!), I'm focusing on how to work effectively with AI tooling and design thinking at the iOS level.
 
+## Search Page
+This I wrote on my own with occasional help from ChatGPT directly through Xcode. In Xcode 26 it's kind of just okay. It wasn't as robust as working through the terminal like via Claude Code. However, WWDC26 just launched and they've made what look like big improvements here. Xcode 27's agent integration seems to be better for development across the entire project; we'll see.
+
 ## One Spec-Driven Implementation (so far)
 [Card Detail Screen](Specs/CardDetailScreenUltraplanSpec.md)
 This entire page was built out in Claude Code plan mode. I used it with typical prompt questions to help me build the spec file, then validate all the spec plans, and finally make the implementation.
