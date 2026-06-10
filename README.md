@@ -1,4 +1,4 @@
-# Boltstorm
+# Boltstorm - Ongoing Portfolio Project
 A personal sandbox for playing with SwiftUI and the Scryfall API in 2026
 
 ## SwiftUI symbolEffect Animation
